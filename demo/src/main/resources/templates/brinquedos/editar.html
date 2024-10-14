@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Brinquedo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f9fb;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu de Navegação -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Loja Brincadeira de Criança</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/brinquedos">Lista</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/brinquedos/create">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/venda">Vender</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/relatorios">Relatórios</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span th:text="${#authentication.name}">Usuário</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/login">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="form-container">
+                <h1>Editar Brinquedo</h1>
+                <form th:action="@{/brinquedos/edit/{id}(id=${brinquedo.id})}" method="post">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome do Brinquedo</label>
+                        <input type="text" id="nome" name="nome" class="form-control" th:value="${brinquedo.nome}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea id="descricao" name="descricao" class="form-control" rows="3" th:text="${brinquedo.descricao}" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="preco" class="form-label">Preço (R$)</label>
+                        <input type="number" step="0.01" id="preco" name="preco" class="form-control" th:value="${brinquedo.preco}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipo" class="form-label">Tipo de Brinquedo</label>
+                        <select id="tipo" name="tipo" class="form-select" required>
+                            <option value="boneca" th:selected="${brinquedo.tipo == 'boneca'}">Boneca</option>
+                            <option value="carrinho" th:selected="${brinquedo.tipo == 'carrinho'}">Carrinho</option>
+                            <option value="lego" th:selected="${brinquedo.tipo == 'lego'}">Lego</option>
+                            <option value="polly" th:selected="${brinquedo.tipo == 'polly'}">Polly</option>
+                            <option value="quebra-cabeca" th:selected="${brinquedo.tipo == 'quebra-cabeca'}">Quebra-cabeça</option>
+                            <option value="tabuleiro" th:selected="${brinquedo.tipo == 'tabuleiro'}">Tabuleiro</option>
+                            <option value="cartas" th:selected="${brinquedo.tipo == 'cartas'}">Cartas</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade</label>
+                        <input type="number" id="quantidade" name="quantidade" class="form-control" th:value="${brinquedo.quantidade}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado do Brinquedo</label>
+                        <select id="estado" name="estado" class="form-select" required>
+                            <option value="novo" th:selected="${brinquedo.estado == 'novo'}">Novo</option>
+                            <option value="usado" th:selected="${brinquedo.estado == 'usado'}">Usado</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

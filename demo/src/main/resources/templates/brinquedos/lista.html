@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Brinquedos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Menu de Navegação -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Loja Brincadeira de Criança</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/brinquedos/lista">Lista</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/brinquedos/create">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/brinquedos/venda">Vender</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/brinquedos/relatorios">Relatórios</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span th:text="${#authentication.name}">Usuário</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/login">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Conteúdo principal da página -->
+<div class="container">
+    <h1 class="my-4">Brinquedos Cadastrados</h1>
+
+    <!-- Formulário de Busca/Filtro -->
+    <form method="GET" action="/brinquedos" class="mb-4">
+        <div class="row">
+            <div class="col-md-2">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome">
+            </div>
+            <div class="col-md-2">
+                <label for="tipo" class="form-label">Tipo de Brinquedo</label>
+                <select id="tipo" name="tipo" class="form-control">
+                    <option value="">Todos</option>
+                    <option value="boneca">Boneca</option>
+                    <option value="carrinho">Carrinho</option>
+                    <option value="lego">Lego</option>
+                    <option value="polly">Polly</option>
+                    <option value="quebra-cabeca">Quebra-cabeça</option>
+                    <option value="tabuleiro">Tabuleiro</option>
+                    <option value="cartas">Cartas</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="estado" class="form-label">Estado</label>
+                <select id="estado" name="estado" class="form-control">
+                    <option value="">Todos</option>
+                    <option value="novo">Novo</option>
+                    <option value="usado">Usado</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="precoMin" class="form-label">Preço Mínimo (R$)</label>
+                <input type="number" step="0.01" id="precoMin" name="precoMin" class="form-control" placeholder="0.00">
+            </div>
+            <div class="col-md-2">
+                <label for="precoMax" class="form-label">Preço Máximo (R$)</label>
+                <input type="number" step="0.01" id="precoMax" name="precoMax" class="form-control" placeholder="0.00">
+            </div>
+            <div class="col-md-2">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" id="id" name="id" class="form-control" placeholder="ID">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
+    </form>
+
+    <!-- Botão para Adicionar Novo Brinquedo -->
+    <div class="mb-3">
+        <a href="/brinquedos/create" class="btn btn-success">Adicionar Novo Brinquedo</a>
+    </div>
+
+    <!-- Tabela de Brinquedos -->
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço (R$)</th>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+            <th>Estado</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop para exibir cada brinquedo -->
+        <tr th:each="brinquedo : ${brinquedos}">
+            <td th:text="${brinquedo.id}"></td>
+            <td th:text="${brinquedo.nome}"></td>
+            <td th:text="${brinquedo.descricao}"></td>
+            <td th:text="${brinquedo.preco}"></td>
+            <td th:text="${brinquedo.tipo}"></td>
+            <td th:text="${brinquedo.quantidade}"></td>
+            <td th:text="${brinquedo.estado}"></td>
+            <td>
+                <a th:href="@{/brinquedos/edit/{id}(id=${brinquedo.id})}" class="btn btn-warning" th:if="${#authorization.expression('hasRole(\'ADMIN\'))}">Editar</a>
+                <a th:href="@{/brinquedos/delete/{id}(id=${brinquedo.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este brinquedo?');" th:if="${#authorization.expression('hasRole(\'ADMIN\'))}">Excluir</a>
+                <a th:href="@{/vender/{id}(id=${brinquedo.id})}" class="btn btn-primary">Vender</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Inclusão do Bootstrap JS para funcionalidade adicional -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

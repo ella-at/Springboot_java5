@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venda de Brinquedo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f7f9fb;
+    }
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    function calcularTotal() {
+      var preco = parseFloat(document.getElementById("preco").value);
+      var quantidade = parseInt(document.getElementById("quantidade").value);
+      if (!isNaN(preco) && !isNaN(quantidade)) {
+        var total = preco * quantidade;
+        document.getElementById("total").value = total.toFixed(2);
+      }
+    }
+
+    function validarFormulario() {
+      var quantidade = parseInt(document.getElementById("quantidade").value);
+      if (quantidade <= 0) {
+        alert("A quantidade deve ser maior que 0.");
+        return false;
+      }
+      return true;
+    }
+
+  </script>
+</head>
+<body>
+
+<!-- Menu de Navegação -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Loja Brincadeira de Criança</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/brinquedos">Lista</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/brinquedos/create">Cadastrar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/venda">Vender</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/relatorios">Relatórios</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span th:text="${#authentication.name}">Usuário</span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/login">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="form-container">
+        <h1>Venda de Brinquedo</h1>
+        <form th:action="@{/vender/{id}(id=${brinquedo.id})}" method="post">
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome do Brinquedo</label>
+            <input type="text" id="nome" class="form-control" th:value="${brinquedo.nome}" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label for="preco" class="form-label">Preço Unitário (R$)</label>
+            <input type="text" id="preco" class="form-control" th:value="${brinquedo.preco}" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label for="quantidade" class="form-label">Quantidade a Vender</label>
+            <input type="number" id="quantidade" name="quantidade" class="form-control" min="1" th:max="${brinquedo.quantidade}" required onchange="calcularTotal()">
+          </div>
+
+          <div class="mb-3">
+            <label for="total" class="form-label">Valor Total (R$)</label>
+            <input type="text" id="total" class="form-control" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label for="formaPagamento" class="form-label">Forma de Pagamento</label>
+            <select id="formaPagamento" name="formaPagamento" class="form-select" required>
+              <option value="cartao">Cartão</option>
+              <option value="dinheiro">Dinheiro</option>
+              <option value="pix">Pix</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="funcionario" class="form-label">Funcionário Responsável</label>
+            <input type="text" id="funcionario" class="form-control" th:value="${#authentication.name}" readonly>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100">Confirmar Venda</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
