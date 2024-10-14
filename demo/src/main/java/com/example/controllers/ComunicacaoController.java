@@ -21,7 +21,7 @@ public class ComunicacaoController {
     }
 
     // Endpoint para o cliente enviar uma mensagem ao servidor
-    @PostMapping("/client")
+    @PostMapping("/cliente")
     public String startClient(@RequestParam String message) {
         try {
             return "Resposta do servidor: " + comunicacaoService.startClient(message);

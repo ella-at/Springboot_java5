@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -18,6 +16,21 @@ public class BrinquedoController {
 
     @Autowired
     private BrinquedoService brinquedoService;
+
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("brinquedo", new Brinquedo());
+        return "brinquedos/create";
+    }
+
+    @PostMapping("/create")
+    public String createBrinquedo(Brinquedo brinquedo, RedirectAttributes redirectAttributes) {
+        brinquedoService.save(brinquedo);
+        redirectAttributes.addFlashAttribute("success", "Brinquedo criado com sucesso!");
+        return "redirect:/brinquedos/lista";
+    }
+
 
     @GetMapping("/lista")
     public String filterBrinquedos(Model model,
@@ -43,18 +56,6 @@ public class BrinquedoController {
         return "brinquedos/detail";
     }
 
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("brinquedo", new Brinquedo());
-        return "brinquedos/create";
-    }
-
-    @PostMapping("/create")
-    public String createBrinquedo(Brinquedo brinquedo, RedirectAttributes redirectAttributes) {
-        brinquedoService.save(brinquedo);
-        redirectAttributes.addFlashAttribute("success", "Brinquedo criado com sucesso!");
-        return "redirect:/brinquedos/lista";
-    }
 
     @GetMapping("/editar/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
