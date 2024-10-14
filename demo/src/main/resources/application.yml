@@ -21,3 +21,12 @@ spring:
       name: admin
       password: admin123
       roles: ADMIN
+    users:
+      - name: user
+        password: user123
+        roles: USER
+      - name: prof
+        password: prof123
+        roles: ADMIN
+
+
