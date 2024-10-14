@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Usuário não encontrado.");
         }
         return User.withUsername(usuario.getUsername())
-                .password(usuario.getPassword())
+                .password(usuario.getSenha())
                 .roles(usuario.getRole())
                 .build();
     }

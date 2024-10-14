@@ -12,13 +12,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-      thymeleaf:
-        cache: false
-    server:
-      port: 8080
-    spring:
-      security:
-        user:
-          name: admin
-          password: 1234
-          roles: ADMIN
+  thymeleaf:
+    cache: false
+  server:
+    port: 8080
+  security:
+    user:
+      name: admin
+      password: admin123
+      roles: ADMIN
