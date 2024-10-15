@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/springboot-cp-java
-    username: postgres
-    password: 022501
+    url: jdbc:postgresql://localhost:5432/springboot_cp_java
+    username: cp_java
+    password: javacp
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
