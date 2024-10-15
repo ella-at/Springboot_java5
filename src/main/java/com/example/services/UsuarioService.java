@@ -27,4 +27,18 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
+    // Validação de login
+    public boolean validarLogin(String username, String senha) {
+        // Busca o usuário pelo username no banco de dados
+        Usuario usuario = usuarioRepository.findByUsername(username);
+
+        if (usuario == null) {
+            // Se o usuário não existir, retorna false
+            return false;
+        }
+
+        // Verifica se a senha fornecida corresponde à senha criptografada no banco de dados
+        return passwordEncoder.matches(senha, usuario.getSenha());
+    }
+
 }

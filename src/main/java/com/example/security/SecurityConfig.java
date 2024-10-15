@@ -11,10 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
