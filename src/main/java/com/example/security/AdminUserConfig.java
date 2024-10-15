@@ -35,6 +35,22 @@ public class AdminUserConfig {
             } else {
                 System.out.println("Usuário admin já existe.");
             }
+
+            // Verifica se o usuário user já existe
+            if (usuarioRepository.findByUsername("user") == null) {
+                // Cria o usuário user com senha e role USER
+                Usuario user = new Usuario();
+                user.setUsername("user");
+                user.setSenha(passwordEncoder.encode("user123"));
+                user.setRole("USER");
+
+                // Salva o usuário no banco de dados
+                usuarioRepository.save(user);
+
+                System.out.println("Usuário user criado com sucesso!");
+            } else {
+                System.out.println("Usuário user já existe.");
+            }
         };
     }
 }

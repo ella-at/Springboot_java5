@@ -12,17 +12,19 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    // Método para salvar o usuário com a senha criptografada
-    public void salvarUsuario(Usuario usuario) {
-        // Criptografa a senha antes de salvar no banco de dados
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        usuarioRepository.save(usuario);
-    }
-
     // Verificar se o usuário já existe
     public boolean usuarioJaExiste(String username) {
         return usuarioRepository.findByUsername(username) != null;
     }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    // Método para salvar o usuário com a senha criptografada
+    public void salvarUsuario(Usuario usuario, String role) {
+        // Criptografa a senha antes de salvar no banco de dados
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        usuario.setRole(role); // Define a role recebida (ADMIN ou USER)
+        usuarioRepository.save(usuario);
+    }
+
 }

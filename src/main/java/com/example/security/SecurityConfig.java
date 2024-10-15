@@ -3,9 +3,6 @@ package com.example.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,12 +25,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/login", "/usuarios/cadastro").permitAll()
-                        .requestMatchers("/brinquedos/create", "/brinquedos/editar/**", "/brinquedos/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/entrar", "/api/usuarios/cadastro").permitAll()
+                        .requestMatchers("/brinquedos/lista", "/brinquedos/detail/**").hasRole("USER")
+                        .requestMatchers("/brinquedos/create", "/brinquedos/editar/**", "/brinquedos/delete/**", "/brinquedos/venda/**", "/brinquedos/relatorios/**", "/index/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
+                        .loginPage("/entrar")
                         .defaultSuccessUrl("/index", true)
                         .permitAll()
                 )

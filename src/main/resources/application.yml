@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/springboot-cp-java
-    username: brinquedos_user
+    username: postgres
     password: 022501
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -15,7 +15,7 @@ spring:
   thymeleaf:
     cache: false
   server:
-    port: 8080
+    port: 8081
   security:
     user:
       name: admin
