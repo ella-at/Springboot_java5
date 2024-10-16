@@ -11,7 +11,7 @@
 <!-- Menu de Navegação -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Loja Brincadeira de Criança</a>
+        <a class="navbar-brand" href="/brinquedos/lista">Loja Brincadeira de Criança</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,17 +24,17 @@
                     <a class="nav-link" href="/brinquedos/create">Cadastrar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/venda">Vender</a>
+                    <a class="nav-link" href="/brinquedos/venda">Vender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/relatorios">Relatórios</a>
+                    <a class="nav-link" href="/brinquedos/relatorios">Relatórios</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span th:text="${#authentication.name}">Usuário</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="/entrar">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,13 +64,12 @@
             </div>
         </div>
 
-        <a th:href="@{/brinquedos/edit/{id}(id=${brinquedo.id})}" class="btn btn-primary mt-3">Editar</a>
-        <a th:href="@{/brinquedos/delete/{id}(id=${brinquedo.id})}" class="btn btn-danger mt-3">Excluir</a>
+
     </div>
 
     <!-- Exibe um botão para voltar à lista de brinquedos -->
     <div class="mt-3">
-        <a th:href="@{/brinquedos}" class="btn btn-secondary">Voltar à Lista de Brinquedos</a>
+        <a th:href="@{/brinquedos/lista}" class="btn btn-secondary">Voltar à Lista de Brinquedos</a>
     </div>
 </div>
 

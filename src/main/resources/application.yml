@@ -13,10 +13,16 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
   thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
     cache: false
   server:
     port: 8080
   security:
+    default-filter: disabled
+    logging:
+      level:
+        org.springframework.security: DEBUG
     user:
       name: admin
       password: admin123

@@ -14,8 +14,8 @@ import java.security.KeyPair;
 @Service
 public class ComunicacaoService {
 
-    private static final String SERVER_ADDRESS = "127.0.0.1";
-    private static final int SERVER_PORT = 65432;
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int SERVER_PORT = 5432;
     private Connection connection;
     private KeyPair serverKeyPair;
     private KeyPair clientKeyPair;
@@ -75,9 +75,9 @@ public class ComunicacaoService {
                 // Valida o login no sistema usando UsuarioService
                 boolean loginValido = usuarioService.validarLogin(username, password);
                 if (loginValido) {
-                    return "LOGIN SUCCESS";
+                    return "LOGIN REALIZADO COM SUCESSO";
                 } else {
-                    return "LOGIN FAILED";
+                    return "LOGIN FALHOU";
                 }
             } else if (mensagem.startsWith("VENDA")) {
                 // Exemplo de mensagem: "VENDA:brinquedoId,quantidade,formaPagamento,funcionario"

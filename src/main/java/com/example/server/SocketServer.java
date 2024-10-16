@@ -17,7 +17,7 @@ import java.net.Socket;
 import java.security.KeyPair;
 
 public class SocketServer {
-    private static final int PORT = 65432;
+    private static final int PORT = 5432;
 
     @Autowired
     private BrinquedoService brinquedoService;
@@ -73,9 +73,9 @@ public class SocketServer {
                 // Validar login com o UsuarioService
                 boolean loginValido = usuarioService.validarLogin(username, password);
                 if (loginValido) {
-                    return "LOGIN SUCCESS";
+                    return "LOGIN REALIZADO COM SUCESSO";
                 } else {
-                    return "LOGIN FAILED";
+                    return "LOGIN FALHOU";
                 }
             } else if (mensagem.startsWith("venda")) {
                     // Exemplo de comando: "venda:brinquedoId,quantidade,formaPagamento,funcionario"
