@@ -1,5 +1,4 @@
 CP5 - JAVA
-
 Deploy: https://springboot-java5-1.onrender.com
 
 
@@ -15,7 +14,7 @@ O ADMIN tem controle total sobre o sistema, enquanto o USER tem permissões limi
 Integração com PostgreSQL:
 Toda a persistência de dados, como informações sobre usuários, brinquedos e vendas, é feita utilizando o PostgreSQL. O banco de dados relacional foi escolhido para garantir que todas as operações de CRUD fossem realizadas de forma confiável e escalável. O Spring Data JPA foi usado para gerenciar a interação com o banco de dados de forma eficiente.
 A aplicação utiliza o PostgreSQL para armazenamento de dados persistentes. O Spring Boot, através do Spring Data JPA, facilita a comunicação com o banco de dados, gerando queries automaticamente com base nas entidades Java.
-![img_4.png](img_4.png)
+
 Essa configuração define a conexão com o banco de dados PostgreSQL, onde o Spring Data JPA cuida das operações de CRUD.
 
 Uso de Sockets TCP para Comunicação
@@ -23,14 +22,13 @@ A comunicação entre o cliente e o servidor ocorre via Sockets TCP. O cliente s
 O Cliente estabelece a conexão via TCP com o servidor.
 O Servidor fica à escuta em uma determinada porta, aguardando conexões de clientes.
 Exemplo de código no cliente para conexão via Socket TCP:
-![img_5.png](img_5.png)
+
 
 Criptografia RSA para Comunicação Segura
 Para garantir a segurança na comunicação, a aplicação utiliza RSA (Rivest–Shamir–Adleman) para criptografia assimétrica. O RSA é utilizado para criptografar mensagens enviadas entre o cliente e o servidor, garantindo que as credenciais e informações sensíveis sejam protegidas contra interceptações.
 O Cliente gera um par de chaves RSA (pública e privada) usando o RSAKeyGenerator.
 O Servidor e o Cliente trocam mensagens criptografadas usando suas respectivas chaves públicas e privadas.
-![img_6.png](img_6.png)
-![img_7.png](img_7.png)
+
 
 CRUD (Create, Read, Update, Delete):
 As operações de CRUD para os brinquedos foram implementadas com o uso de Spring Data JPA. A entidade Brinquedo é mapeada para o banco de dados, e os repositórios Spring permitem a execução de operações como salvar, atualizar, buscar e deletar registros no PostgreSQL.
@@ -39,8 +37,7 @@ Criar novos brinquedos no catálogo.
 Ler (listar) os brinquedos existentes.
 Atualizar informações dos brinquedos, como nome, preço e quantidade em estoque.
 Excluir brinquedos do catálogo quando necessário.
-![img_8.png](img_8.png)
-![img_9.png](img_9.png)
+
 Com essa estrutura, as operações de CRUD são realizadas de forma automática, utilizando o repositório para consultar o banco de dados.
 
 
@@ -62,11 +59,11 @@ A tela de login foi implementada com o Thymeleaf, um motor de templates para ger
 
 Exemplo de Código: Controlador de Login
 No backend, o controlador LoginController lida com a requisição para a página de login:
-![img_1.png](img_1.png)
+
 
 Implementação da Autenticação
 O sistema de login foi implementado usando Spring Security, o que permite autenticação baseada em credenciais (nome de usuário e senha). As senhas são criptografadas antes de serem armazenadas no banco de dados, garantindo segurança adicional.
-![img_2.png](img_2.png)
+
 Esta configuração garante que a aplicação redirecione para a página de login quando necessário e permita o acesso a outros recursos apenas após a autenticação bem-sucedida.
 
 
@@ -74,7 +71,7 @@ Gerenciamento de Usuários
 A aplicação gerencia diferentes tipos de usuários com diferentes permissões:
 ADMIN: Possui acesso completo ao sistema, incluindo a gestão de vendas e estoque.
 USER: Possui acesso limitado às operações, como consulta de estoque e visualização de brinquedos.
-![img_3.png](img_3.png)
+
 
 Considerações Finais
 Este projeto da Loja de Brinquedos foi projetado para oferecer uma solução completa para gerenciamento de vendas, controle de estoque e autenticação de usuários. A combinação de Spring Boot, PostgreSQL, Sockets TCP, e Criptografia RSA cria um sistema seguro e escalável. O uso de Spring Data JPA simplifica o gerenciamento dos dados, enquanto o Spring Security garante que o acesso seja devidamente controlado.
