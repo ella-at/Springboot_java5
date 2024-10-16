@@ -45,7 +45,7 @@ public class ComunicacaoService {
         }).start();
     }
 
-    // Método para iniciar o servidor
+    // Meodo para iniciar o servidor
     public String startServer() throws Exception {
         ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
         Socket clientSocket = serverSocket.accept();

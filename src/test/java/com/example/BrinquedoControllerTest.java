@@ -43,7 +43,7 @@ public class BrinquedoControllerTest {
         // Simula o comportamento do serviço buscarPorId
         when(brinquedoService.buscarPorId(1L)).thenReturn(brinquedoMock);
 
-        // Chama o método do controlador passando o ID e o Model
+        // Chama o meodo do controlador passando o ID e o Model
         String view = brinquedoController.listarBrinquedos(1L, model);
 
         // Verifica se a view retornada é correta

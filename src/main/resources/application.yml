@@ -28,10 +28,9 @@ spring:
       - name: prof
         password: prof123
         roles: ADMIN
-security:
-  form-login:
-    login-page: /entrar
-    default-target-url: /index
+    form-login:
+      login-page: /entrar
+      default-target-url: /index
 
 
 
