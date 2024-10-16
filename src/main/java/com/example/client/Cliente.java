@@ -9,8 +9,8 @@ import java.security.KeyPair;
 
 
 public class Cliente {
-    private static final String SERVER_ADDRESS = "127.0.0.1";
-    private static final int SERVER_PORT = 65432;
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int SERVER_PORT = 5432;
     private Connection connection;
     private KeyPair clientKeyPair;
 
@@ -24,7 +24,7 @@ public class Cliente {
 
         // Conecta ao servidor
         Socket serverSocket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-        System.out.println("Conectado ao servidor da loja de brinquedos!");
+        System.out.println("Conectado ao servidor da Loja Brincadeira de Criança!");
 
         // Cria a conexão e manipula a troca de mensagens
         Connection connection = new Connection(serverSocket, clientKeyPair.getPublic(), clientKeyPair.getPrivate());
@@ -66,7 +66,7 @@ public class Cliente {
         String resposta = receberResposta();
         System.out.println("Resposta do servidor: " + resposta);
 
-        return "LOGIN SUCCESS".equals(resposta);
+        return "Login realizado com sucesso".equals(resposta);
     }
 
     // Método para realizar uma venda
