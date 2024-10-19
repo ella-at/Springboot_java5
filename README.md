@@ -1,10 +1,16 @@
 CP5 - JAVA
+
 Deploy: https://springboot-java5-1.onrender.com
 
+
 Integrantes:
+
 Marcela Morera - RM 552051
+
 Nathalia Braga - RM 552221
+
 Daniele Vargas - RM 99400
+
 Felipe
 
 
@@ -21,15 +27,6 @@ A aplicação utiliza o PostgreSQL para armazenamento de dados persistentes. O S
 
 Essa configuração define a conexão com o banco de dados PostgreSQL, onde o Spring Data JPA cuida das operações de CRUD.
 
-
-Uso de Sockets TCP para Comunicação
-
-A comunicação entre o cliente e o servidor ocorre via Sockets TCP. O cliente se conecta ao servidor da loja de brinquedos utilizando sockets, e todas as trocas de mensagens (como login e operações de venda) são feitas por esse canal seguro.
-O Cliente estabelece a conexão via TCP com o servidor.
-O Servidor fica à escuta em uma determinada porta, aguardando conexões de clientes.
-Exemplo de código no cliente para conexão via Socket TCP:
-
-![image](https://github.com/user-attachments/assets/890e50ac-dbe6-4188-bdc1-281a6374797d)
 
 
 Criptografia RSA para Comunicação Segura
@@ -98,10 +95,16 @@ ADMIN: Possui acesso completo ao sistema, incluindo a gestão de vendas e estoqu
 USER: Possui acesso limitado às operações, como consulta da lista de itens cadastrados.
 
 
+Deploy:
+![image](https://github.com/user-attachments/assets/84f0469f-f963-4129-8fd7-9e4b6584c863)
+
+![image](https://github.com/user-attachments/assets/742f5ad8-52be-452c-9d15-e516e7ebf3b6)
+
+
 
 Considerações Finais
 
-Este projeto da Loja de Brinquedos foi projetado para oferecer uma solução completa para gerenciamento de vendas, controle de estoque e autenticação de usuários. A combinação de Spring Boot, PostgreSQL, Sockets TCP, e Criptografia RSA cria um sistema seguro e escalável. O uso de Spring Data JPA simplifica o gerenciamento dos dados, enquanto o Spring Security garante que o acesso seja devidamente controlado.
+Este projeto da Loja de Brinquedos foi projetado para oferecer uma solução completa para gerenciamento de vendas, controle de estoque e autenticação de usuários. A combinação de Spring Boot, PostgreSQL , MVC e Criptografia RSA cria um sistema seguro e escalável. O uso de Spring Data JPA simplifica o gerenciamento dos dados, enquanto o Spring Security garante que o acesso seja devidamente controlado.
 
 Se necessário, o projeto pode ser expandido para incluir mais funcionalidades, como integração com APIs externas para pagamentos.
 
