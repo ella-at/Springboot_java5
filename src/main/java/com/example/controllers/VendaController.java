@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/venda")
+@RequestMapping("/templates")
 public class VendaController {
 
     @Autowired
@@ -18,14 +18,14 @@ public class VendaController {
     @Autowired
     private BrinquedoRepository brinquedoRepository;
 
-    @GetMapping("/{id}")
+    @GetMapping("/venda/{id}")
     public String exibirPaginaVenda(@PathVariable Long id, Model model) {
         Brinquedo brinquedo = brinquedoRepository.findById(id).orElse(null);
         model.addAttribute("brinquedo", brinquedo);
         return "venda";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/venda/{id}")
     public String realizarVenda(@PathVariable Long id,
                                 @RequestParam int quantidade,
                                 @RequestParam String formaPagamento,

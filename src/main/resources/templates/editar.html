@@ -28,30 +28,30 @@
 <!-- Menu de Navegação -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Loja Brincadeira de Criança</a>
+        <a class="navbar-brand" href="/lista">Loja Brincadeira de Criança</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/brinquedos">Lista</a>
+                    <a class="nav-link" href="/index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/brinquedos/create">Cadastrar</a>
+                    <a class="nav-link" href="/create">Cadastrar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/venda">Vender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/relatorios">Relatórios</a>
+                    <a class="nav-link" href="/lista">Lista</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span th:text="${#authentication.name}">Usuário</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/entrar">Logout</a></li>
+                        <li><a class="dropdown-item" href="/login">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,7 +64,7 @@
         <div class="col-md-8">
             <div class="form-container">
                 <h1>Editar Brinquedo</h1>
-                <form th:action="@{/brinquedos/edit/{id}(id=${brinquedo.id})}" method="post">
+                <form th:action="@{/templates/editar/{id}(id=${brinquedo.id})}" method="post">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome do Brinquedo</label>
                         <input type="text" id="nome" name="nome" class="form-control" th:value="${brinquedo.nome}" required>

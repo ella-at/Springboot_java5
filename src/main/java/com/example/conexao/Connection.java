@@ -24,7 +24,7 @@ public class Connection {
         this.inputStream = new ObjectInputStream(socket.getInputStream());
     }
 
-    // Método para enviar mensagem criptografada
+    // Méodo para enviar mensagem criptografada
     public void sendMessage(String message, PublicKey recipientPublicKey) throws Exception {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, recipientPublicKey);
@@ -33,7 +33,7 @@ public class Connection {
         outputStream.flush();
     }
 
-    // Método para receber mensagem criptografada e descriptografar
+    // Méodo para receber mensagem criptografada e descriptografar
     public String receiveMessage() throws Exception {
         byte[] encryptedMessage = (byte[]) inputStream.readObject();
         Cipher cipher = Cipher.getInstance("RSA");

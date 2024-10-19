@@ -20,8 +20,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/entrar", "/api/usuarios/cadastro").permitAll()
-                        .requestMatchers("/brinquedos/lista", "/brinquedos/detail/**").hasRole("USER")
-                        .requestMatchers("/brinquedos/create", "/brinquedos/editar/**", "/brinquedos/delete/**", "/brinquedos/venda/**", "/brinquedos/relatorios/**", "/index/**").hasRole("ADMIN")
+                        .requestMatchers("/lista", "/detail/**").hasRole("USER")
+                        .requestMatchers("/create", "/editar/**", "/delete/**", "/venda/**", "/relatorios/**", "/index/**", "/lista/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

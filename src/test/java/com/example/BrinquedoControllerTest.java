@@ -47,7 +47,7 @@ public class BrinquedoControllerTest {
         String view = brinquedoController.listarBrinquedos(1L, model);
 
         // Verifica se a view retornada é correta
-        assertEquals("brinquedos/detail", view);
+        assertEquals("templates/detail", view);
 
         // Verifica se o brinquedo foi adicionado ao modelo
         verify(model, times(1)).addAttribute("brinquedo", brinquedoMock);
@@ -61,7 +61,7 @@ public class BrinquedoControllerTest {
     public void testExibirFormularioCriacao() {
         // Testa se o formulário de criação é exibido corretamente
         String view = brinquedoController.showCreateForm(model);
-        assertEquals("brinquedos/create", view);
+        assertEquals("templates/create", view);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class BrinquedoControllerTest {
         when(brinquedoService.save(brinquedo)).thenReturn(brinquedo);
 
         String view = brinquedoController.createBrinquedo(brinquedo, redirectAttributes);
-        assertEquals("redirect:/brinquedos/lista", view);
+        assertEquals("redirect:/templates/lista", view);
         verify(brinquedoService, times(1)).save(brinquedo);
     }
 
@@ -90,7 +90,7 @@ public class BrinquedoControllerTest {
         when(brinquedoService.buscarPorId(1L)).thenReturn(brinquedo);
 
         String view = brinquedoController.showEditForm(1L, model);
-        assertEquals("brinquedos/editar", view);
+        assertEquals("templates/editar", view);
         verify(brinquedoService, times(1)).buscarPorId(1L);
     }
 
@@ -104,7 +104,7 @@ public class BrinquedoControllerTest {
         when(brinquedoService.save(brinquedo)).thenReturn(brinquedo);
 
         String view = brinquedoController.updateBrinquedo(1L, brinquedo, redirectAttributes);
-        assertEquals("redirect:/brinquedos/lista", view);
+        assertEquals("redirect:/templates/lista", view);
         verify(brinquedoService, times(1)).save(brinquedo);
     }
 
@@ -112,7 +112,7 @@ public class BrinquedoControllerTest {
     public void testDeletarBrinquedo() throws Exception {
         // Testa se o brinquedo é deletado corretamente
         String view = brinquedoController.deleteBrinquedo(1L, redirectAttributes);
-        assertEquals("redirect:/brinquedos/lista", view);
+        assertEquals("redirect:/templates/lista", view);
         verify(brinquedoService, times(1)).deletarPorId(1L);
     }
 }

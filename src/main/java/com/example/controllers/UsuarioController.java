@@ -31,13 +31,13 @@ public class UsuarioController {
         // Verifica se o nome de usuário já existe no banco
         if (usuarioService.usuarioJaExiste(usuario.getUsername())) {
             model.addAttribute("erro", "O nome de usuário já está em uso.");
-            return "usuarios/cadastro";  // Retorna à página de cadastro se houver erro
+            return "usuarios/cadastro";
         }
 
         // Salva o usuário com a senha criptografada
         usuarioService.salvarUsuario(usuario, role);
 
         // Redireciona para a página de login após o cadastro bem-sucedido
-        return "redirect:/entrar"; // Redireciona para a página de login após o cadastro
+        return "redirect:/templates/entrar";
     }
 }

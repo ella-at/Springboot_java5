@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/brinquedos")
+@RequestMapping("/templates")
 public class BrinquedoController {
 
     @Autowired
@@ -21,14 +21,14 @@ public class BrinquedoController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("brinquedo", new Brinquedo());
-        return "brinquedos/create";
+        return "templates/create";
     }
 
     @PostMapping("/create")
     public String createBrinquedo(Brinquedo brinquedo, RedirectAttributes redirectAttributes) {
         brinquedoService.save(brinquedo);
-        redirectAttributes.addFlashAttribute("success", "Brinquedo criado com sucesso!");
-        return "redirect:/brinquedos/lista";
+        redirectAttributes.addFlashAttribute("sucesso", "Brinquedo criado com sucesso!");
+        return "redirect:/templates/lista";
     }
 
 
@@ -42,18 +42,18 @@ public class BrinquedoController {
                                    @RequestParam(required = false) Long id) {
         List<Brinquedo> brinquedos = brinquedoService.filterBrinquedos(nome, tipo, estado, precoMin, precoMax, id);
         model.addAttribute("brinquedos", brinquedos);
-        return "brinquedos/lista";
+        return "templates/lista";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/lista/{id}")
     public String listarBrinquedos(@PathVariable Long id, Model model) {
         try {
             Brinquedo brinquedo = brinquedoService.buscarPorId(id);
             model.addAttribute("brinquedo", brinquedo);
         } catch (Exception e) {
-            model.addAttribute("error", "Erro: " + e.getMessage());
+            model.addAttribute("erro", "Erro: " + e.getMessage());
         }
-        return "brinquedos/detail";
+        return "templates/detail";
     }
 
 
@@ -63,9 +63,9 @@ public class BrinquedoController {
             Brinquedo brinquedo = brinquedoService.buscarPorId(id);
             model.addAttribute("brinquedo", brinquedo);
         } catch (Exception e) {
-            model.addAttribute("error", "Erro: " + e.getMessage());
+            model.addAttribute("erro", "Erro: " + e.getMessage());
         }
-        return "brinquedos/editar";
+        return "templates/editar";
     }
 
     @PostMapping("/editar/{id}")
@@ -73,21 +73,21 @@ public class BrinquedoController {
         try {
             brinquedo.setId(id);  // Ensure we are updating the correct entity
             brinquedoService.save(brinquedo);
-            redirectAttributes.addFlashAttribute("success", "Brinquedo atualizado com sucesso!");
+            redirectAttributes.addFlashAttribute("sucesso", "Brinquedo atualizado com sucesso!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Erro: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("erro", "Erro: " + e.getMessage());
         }
-        return "redirect:/brinquedos/lista";
+        return "redirect:/templates/lista";
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteBrinquedo(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
             brinquedoService.deletarPorId(id);
-            redirectAttributes.addFlashAttribute("success", "Brinquedo deletado com sucesso!");
+            redirectAttributes.addFlashAttribute("sucesso", "Brinquedo deletado com sucesso!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Erro: " + e.getMessage());
+            redirectAttributes.addFlashAttribute("erro", "Erro: " + e.getMessage());
         }
-        return "redirect:/brinquedos/lista";
+        return "redirect:/templates/lista";
     }
 }

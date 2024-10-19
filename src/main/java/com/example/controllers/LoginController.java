@@ -6,7 +6,6 @@ import com.example.services.ComunicacaoService;
 import com.example.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/entrar")
+@RequestMapping("/templates")
 public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
@@ -43,19 +42,11 @@ public class LoginController {
 
         if (usuario != null && passwordEncoder.matches(password, usuario.getSenha())) {
 
-            // Enviar mensagem ao servidor ao logar
-            try {
-                String serverResponse = comunicacaoService.startClient("Usuário logou: " + username);
-                System.out.println("Resposta do servidor: " + serverResponse);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
             // Se o login for bem-sucedido, redireciona para a página inicial
             if (usuario.getRole().equals("ADMIN")) {
                 return "redirect:/index";  // Redirecionar para a página inicial do sistema
             } else if (usuario.getRole().equals("USER")) {
-                return "redirect:/brinquedos/lista";  // Redirecionar para a lista de brinquedos
+                return "redirect:/templates/lista";  // Redirecionar para a lista de brinquedos
             }
         } else {
             // Se o login falhar, retorna para a página de login com uma mensagem de erro
